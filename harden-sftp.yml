@@ -1,0 +1,15 @@
+# harden a CentOS 7.4 server for SFTP
+# Acceptable use policy for NZRS NTP servers: https://ntp.net.nz/pages/aup.html
+- name: Harden SFTP server
+  hosts: sftp-servers
+  become: yes
+  vars:
+    security_enable_firewalld: no
+    security_rhel7_initialize_aide: no
+    security_ntp_servers:
+      - s1.ntp.net.nz
+      - s2.ntp.net.nz
+      - s3.ntp.net.nz
+      - s4.ntp.net.nz
+  roles:
+    - ansible-hardening
